@@ -19,7 +19,7 @@ export class CatalogoPokemon {
             return;
         }
         this.pokemons.forEach(p => {
-            console.log(`ID: ${p.id.toString()}, Nome: ${p.name}, Tipos: ${p.tipos.join(', ')}, Altura: ${p.altura.toString()}m, Peso: ${p.peso.toString()}kg`);
+            console.log(`ID: ${p.id.toString()} | Nome: ${p.name} | Tipos: ${p.tipos.join(', ')} | Altura: ${p.altura.toString()}m | Peso: ${p.peso.toString()}kg`);
         });
     }
 
