@@ -60,7 +60,7 @@ npm run build
 npm run start
 
 Estrutura do projeto
-
+```
 pokedex-typescript-lite/
 │
 ├── src/
@@ -75,7 +75,7 @@ pokedex-typescript-lite/
 ├── package.json
 ├── tsconfig.json
 └── README.md
-
+```
 Funcionalidades
 Buscar Pokémon por nome ou ID
 
@@ -164,9 +164,10 @@ feat/pokedex
 docs/readme
 
 Melhorias futuras
-
+```
 Exibir HP, ataque e defesa
 
 Criar filtros por tipo de Pokémon
 
 Criar uma API própria com Express
+```
