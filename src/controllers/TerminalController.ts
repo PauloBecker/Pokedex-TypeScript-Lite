@@ -4,45 +4,39 @@ import { CatalogoPokemon } from "../models/CatalogoPokemon";
 import { PokeApiService } from "../services/PokeApiService";
 
 export class TerminalController {
-  private pokeApiService: PokeApiService;
+  private pokeApiService = new PokeApiService();
 
-  private catalogo: CatalogoPokemon;
+  private catalogo = new CatalogoPokemon();
 
-  private rl: readline.Interface;
-
-  constructor() {
-    this.pokeApiService = new PokeApiService();
-    this.catalogo = new CatalogoPokemon();
-    this.rl = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout,
-    });
-  }
+  private rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
 
   iniciar() {
     console.log("=== Pokédex Lite ===");
-    void this.menu();
-  }
+    this.mostrarMenu();
 
-  // Função auxiliar para usar await com readline
-  private perguntar(pergunta: string): Promise<string> {
-    return new Promise((resolve) => {
-      this.rl.question(pergunta, (resposta) => {
-        resolve(resposta);
-      });
+    // Callback normal, não async → não retorna Promise
+    this.rl.on("line", (opcao) => {
+      console.log(`>> Você digitou: ${opcao}`);
+      void this.tratarOpcao(opcao.trim()); // chama função async separada
     });
   }
 
-  private async menu() {
+  private mostrarMenu() {
     console.log("\nEscolha uma opção:");
     console.log("1 - Buscar Pokémon (somente visualizar)");
     console.log("2 - Adicionar Pokémon ao catálogo");
     console.log("3 - Listar catálogo");
     console.log("4 - Remover Pokémon");
     console.log("0 - Sair");
+    this.rl.setPrompt("Opção: ");
+    this.rl.prompt();
+  }
 
-    const opcao = await this.perguntar("Opção: ");
-
+  // Função assíncrona separada
+  private async tratarOpcao(opcao: string): Promise<void> {
     switch (opcao) {
       case "1":
         await this.buscarPokemon();
@@ -64,15 +58,28 @@ export class TerminalController {
         console.log("Opção inválida!");
     }
 
-    void this.menu(); // volta ao menu
+    this.mostrarMenu();
+  }
+
+  private async perguntar(pergunta: string): Promise<string> {
+    this.rl.setPrompt(pergunta);
+    this.rl.prompt();
+    return new Promise((resolve) => {
+      // Callback normal, não async
+      this.rl.once("line", (resposta) => {
+        console.log(`>> Você digitou: ${resposta}`);
+        resolve(resposta.trim());
+      });
+    });
   }
 
   private async buscarPokemon() {
     const entrada = await this.perguntar("Digite o nome ou ID do Pokémon: ");
+    console.log("Buscando Pokémon, aguarde...");
     const pokemon = await this.pokeApiService.buscarPokemon(entrada);
     if (pokemon) {
       console.log(
-        `#${pokemon.id.toString()} - ${pokemon.name} | Tipos: ${pokemon.tipos.join(", ")} | Altura: ${pokemon.altura.toString()} | Peso: ${pokemon.peso.toString()}`,
+        `#${String(pokemon.id)} - ${pokemon.name} | Tipos: ${pokemon.tipos.join(", ")} | Altura: ${String(pokemon.altura)} | Peso: ${String(pokemon.peso)}`,
       );
     } else {
       console.log("[ERRO] Pokémon não encontrado.");
