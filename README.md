@@ -1,7 +1,7 @@
 # Pokédex TypeScript Lite
 
 <div align="center">
-<img src="./docs/poke-fire-removebg-preview.png" width="450px">
+<img src="./docs/poke-fire.png" width="450px">
   <h1>🔥Pokédex TypeScript Lite API⚡</h1>
 </div>
 
