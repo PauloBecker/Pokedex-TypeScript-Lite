@@ -71,14 +71,24 @@ pokedex-typescript-lite/
 │   ├── controllers/
 │   │   └── TerminalController.ts
 │   ├── models/
-│   │   └── CatalogoPokemon.ts
+│   │   ├── CatalogoPokemon.ts
+│   │   ├── Pokemon.ts
+│   │   └── CustomErrors.ts
 │   ├── services/
-│   │   └── PokeApiService.ts
+│   │   ├── PokeApiService.ts
+│   │   └── BoxService.ts
+│   ├── utils/
+│   │   └── textFormatters.ts
 │   └── main.ts
 │
 ├── package.json
+├── package-lock.json
 ├── tsconfig.json
+├── .gitignore
+├── .prettierrc
+├── eslint.config.mjs
 └── README.md
+
 ```
 ## Funcionalidades
 
@@ -270,9 +280,11 @@ https://trello.com/b/jl5Kh9z9/pojedc3a9x-typescript-lite
 
 ## Melhorias futuras
 ```
-Exibir HP, ataque e defesa
+- Exibir HP, ataque e defesa dos Pokémon
+- Criar filtros por tipo de Pokémon
+- Criar uma API própria com Express
+- Implementar e expandir a classe `CustomErrors.ts` para centralizar e padronizar o tratamento de erros
+- Desenvolver a classe `BoxService.ts` para gerenciar caixas de Pokémon e organizar melhor o catálogo
+- Ampliar os utilitários em `textFormatters.ts` para melhorar a formatação e exibição de textos no terminal
 
-Criar filtros por tipo de Pokémon
-
-Criar uma API própria com Express
 ```
