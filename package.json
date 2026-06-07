@@ -7,7 +7,7 @@
     "build:watch": "tsc --watch",
     "start": "node dist/main.js",
     "dev": "node --watch dist/main.js",
-    "dev:ts": "tsx watch src/main.ts"
+    "dev:ts": "tsx src/main.ts"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,7 @@
   "type": "module",
   "devDependencies": {
     "@types/node": "^25.9.1",
+    "@types/prompt-sync": "^4.2.3",
     "@typescript-eslint/eslint-plugin": "^8.59.4",
     "@typescript-eslint/parser": "^8.59.4",
     "eslint": "^9.39.4",
@@ -27,5 +28,8 @@
     "tsx": "^4.22.3",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.59.4"
+  },
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
   }
 }
