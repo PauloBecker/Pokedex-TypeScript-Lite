@@ -1,7 +1,6 @@
-/* eslint-disable prettier/prettier */
-import * as fs from 'fs';
+import * as fs from "fs";
 
-import { PokemonResumo } from './Pokemon';
+import { PokemonResumo } from "./Pokemon";
 
 export class CatalogoPokemon {
   private pokemons: PokemonResumo[] = [];
@@ -16,7 +15,6 @@ export class CatalogoPokemon {
         const dados: string = fs.readFileSync(this.arquivo, "utf-8");
         const lista: unknown = JSON.parse(dados);
 
-        
         if (Array.isArray(lista)) {
           this.pokemons = lista.filter((p: unknown): p is PokemonResumo => {
             if (p === null || typeof p !== "object") {
@@ -37,7 +35,9 @@ export class CatalogoPokemon {
             );
           });
         } else {
-          console.log("[ERRO] Arquivo de catálogo corrompido. Iniciando vazio.");
+          console.log(
+            "[ERRO] Arquivo de catálogo corrompido. Iniciando vazio.",
+          );
           this.pokemons = [];
         }
       }
@@ -56,14 +56,20 @@ export class CatalogoPokemon {
       console.log("[ERRO] Falha ao salvar catálogo:", msg);
     }
   }
-  
-    adicionarPokemon(pokemon: PokemonResumo) {
-    if (isNaN(pokemon.id) || !pokemon.name || !Array.isArray(pokemon.tipos) || isNaN(pokemon.altura) || isNaN(pokemon.peso)) {
+
+  adicionarPokemon(pokemon: PokemonResumo) {
+    if (
+      isNaN(pokemon.id) ||
+      !pokemon.name ||
+      !Array.isArray(pokemon.tipos) ||
+      isNaN(pokemon.altura) ||
+      isNaN(pokemon.peso)
+    ) {
       console.log("[ERRO] Pokémon inválido.");
       return;
     }
 
-    if (this.pokemons.some(p => p.id === pokemon.id)) {
+    if (this.pokemons.some((p) => p.id === pokemon.id)) {
       console.log(`[AVISO] ${pokemon.name} já está no catálogo.`);
       return;
     }
@@ -83,25 +89,17 @@ export class CatalogoPokemon {
     this.salvar();
   }
 
-    listarPokemons(){
-    if (this.pokemons.length === 0) {
-      console.log("[AVISO] Catálogo vazio.");
-      return;
-    }
-
-    console.log("=== Catálogo de Pokémons ===");
-    this.pokemons.forEach(p =>
-      { console.log(`#${String(p.id)} - ${p.name} | Tipos: ${p.tipos.join(", ")} | Altura: ${String(p.altura)} | Peso: ${String(p.peso)}`); }
-    );
+  public listarPokemons(): PokemonResumo[] {
+    return this.pokemons;
   }
 
-    removerPokemon(id: number) {
+  removerPokemon(id: number) {
     if (isNaN(id)) {
       console.log("[ERRO] ID inválido. Digite apenas números.");
       return;
     }
 
-    const index = this.pokemons.findIndex(p => p.id === id);
+    const index = this.pokemons.findIndex((p) => p.id === id);
     if (index === -1) {
       console.log("[ERRO] Pokémon não encontrado no catálogo.");
       return;
