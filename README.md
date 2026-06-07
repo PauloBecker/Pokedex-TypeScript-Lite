@@ -38,7 +38,7 @@ Antes de executar o projeto, é necessário ter instalado:
 
 ## Como instalar
 Clone o repositório:
-```bash
+```
 git clone https://github.com/PauloBecker/Pokedex-TypeScript-Lite
 
 Acesse a pasta do projeto:
@@ -58,8 +58,8 @@ Ou compile e rode:
 
 npm run build
 npm run start
-
-Estrutura do projeto
+```
+## Estrutura do projeto
 ```
 pokedex-typescript-lite/
 │
@@ -76,94 +76,95 @@ pokedex-typescript-lite/
 ├── tsconfig.json
 └── README.md
 ```
-Funcionalidades
-Buscar Pokémon por nome ou ID
+## Funcionalidades
 
-Tratar erro de Pokémon inexistente
+* Buscar Pokémon por nome ou ID
 
-Transformar resposta da API em objeto simplificado
+* Tratar erro de Pokémon inexistente
 
-Adicionar Pokémon ao catálogo local
+* Transformar resposta da API em objeto simplificado
 
-Impedir Pokémon duplicado
+* Adicionar Pokémon ao catálogo local
 
-Listar catálogo
+* Impedir Pokémon duplicado
 
-Remover Pokémon por ID
+* Listar catálogo
 
-Exibir mensagens no terminal
+* Remover Pokémon por ID
 
-Exemplos de execução
+* Exibir mensagens no terminal
+
+## Exemplos de execução
 Busca válida
 Entrada testada:
-
+```
 pikachu
-
+```
 Saída obtida:
 
 [OK] Pokémon encontrado: pikachu
 #25 - pikachu | Tipos: electric | Altura: 4 | Peso: 60
 
-Busca inválida
+### Busca inválida
 Entrada testada:
-
+```
 pokemon-inexistente
-
+```
 Saída obtida:
-
+```
 [ERRO] Pokémon não encontrado.
-
-Duplicidade
+```
+### Duplicidade
 Entrada testada:
-
+```
 adicionar pikachu duas vezes
-
+```
 Saída obtida:
-
+```
 [AVISO] pikachu já está no catálogo.
-
-Remoção
+```
+### Remoção
 Entrada testada:
-
+```
 remover ID 25
-
+```
 Saída obtida:
-
+```
 [OK] Pokémon removido do catálogo.
-
-Conceitos aplicados
-TypeScript
+```
+## Conceitos aplicados
+### TypeScript
 Foram utilizados tipos, interfaces, parâmetros e retornos tipados para garantir segurança e clareza no código.
 
-Interface PokemonResumo
+### Interface - PokemonResumo
 Criada para representar os dados simplificados do Pokémon (id, nome, tipos, altura e peso).
 
-Fetch e async/await
+### Fetch e async/await
 A aplicação consulta a PokeAPI usando fetch com async/await para lidar com chamadas assíncronas.
 
-Tratamento de erros
+### Tratamento de erros
 O projeto lida com Pokémon inexistente ou falha de busca usando try/catch e verificações de retorno.
 
-Métodos de array
+### Métodos de array
 Utilizados métodos como map, find, filter e some para manipular o catálogo de Pokémon.
 
-Classe CatalogoPokemon
+### Classe - CatalogoPokemon
 Contém atributos e métodos para adicionar, listar e remover Pokémon, além de impedir duplicidade.
 
-Organização do Kanban
+### Organização do Kanban
 Link do Kanban:
 https://trello.com/b/jl5Kh9z9/pojedc3a9x-typescript-lite
 
-Branches utilizadas
-main
+### Branches utilizadas
+* main
 
-develop
+* develop
 
-feat/pokedex
+* feat/pokedex
 
-docs/readme
+* docs/readme
 
-Melhorias futuras
+## Melhorias futuras
 ```
 Exibir HP, ataque e defesa
 
