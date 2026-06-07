@@ -16,7 +16,7 @@ export class CatalogoPokemon {
         const dados: string = fs.readFileSync(this.arquivo, "utf-8");
         const lista: unknown = JSON.parse(dados);
 
-        // valida integridade dos dados
+        
         if (Array.isArray(lista)) {
           this.pokemons = lista.filter((p: unknown): p is PokemonResumo => {
             if (p === null || typeof p !== "object") {

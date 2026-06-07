@@ -17,10 +17,9 @@ export class TerminalController {
     console.log("=== Pokédex Lite ===");
     this.mostrarMenu();
 
-    // Callback normal, não async → não retorna Promise
     this.rl.on("line", (opcao) => {
       console.log(`>> Você digitou: ${opcao}`);
-      void this.tratarOpcao(opcao.trim()); // chama função async separada
+      void this.tratarOpcao(opcao.trim());
     });
   }
 
@@ -35,7 +34,6 @@ export class TerminalController {
     this.rl.prompt();
   }
 
-  // Função assíncrona separada
   private async tratarOpcao(opcao: string): Promise<void> {
     switch (opcao) {
       case "1":
@@ -65,7 +63,6 @@ export class TerminalController {
     this.rl.setPrompt(pergunta);
     this.rl.prompt();
     return new Promise((resolve) => {
-      // Callback normal, não async
       this.rl.once("line", (resposta) => {
         console.log(`>> Você digitou: ${resposta}`);
         resolve(resposta.trim());
