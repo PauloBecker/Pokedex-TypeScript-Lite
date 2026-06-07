@@ -15,13 +15,18 @@ export class TerminalController {
 
   iniciar() {
     console.log("=== Pokédex Lite ===");
-    this.mostrarMenu();
+    void this.loopMenu();
+  }
 
-    // Callback normal, não async → não retorna Promise
-    this.rl.on("line", (opcao) => {
-      console.log(`>> Você digitou: ${opcao}`);
-      void this.tratarOpcao(opcao.trim()); // chama função async separada
-    });
+  private async loopMenu(): Promise<void> {
+    this.mostrarMenu();
+    const opcao = await this.perguntar("Opção: ");
+
+    await this.tratarOpcao(opcao.trim());
+
+    if (opcao !== "0") {
+      await this.loopMenu(); // volta ao menu até sair
+    }
   }
 
   private mostrarMenu() {
@@ -31,11 +36,8 @@ export class TerminalController {
     console.log("3 - Listar catálogo");
     console.log("4 - Remover Pokémon");
     console.log("0 - Sair");
-    this.rl.setPrompt("Opção: ");
-    this.rl.prompt();
   }
 
-  // Função assíncrona separada
   private async tratarOpcao(opcao: string): Promise<void> {
     switch (opcao) {
       case "1":
@@ -45,7 +47,7 @@ export class TerminalController {
         await this.adicionarPokemon();
         break;
       case "3":
-        this.catalogo.listarPokemons();
+        this.listarPokemons();
         break;
       case "4":
         await this.removerPokemon();
@@ -55,18 +57,13 @@ export class TerminalController {
         this.rl.close();
         return;
       default:
-        console.log("Opção inválida!");
+        console.log("[ERRO] Opção inválida!");
     }
-
-    this.mostrarMenu();
   }
 
   private async perguntar(pergunta: string): Promise<string> {
-    this.rl.setPrompt(pergunta);
-    this.rl.prompt();
     return new Promise((resolve) => {
-      // Callback normal, não async
-      this.rl.once("line", (resposta) => {
+      this.rl.question(pergunta, (resposta) => {
         console.log(`>> Você digitou: ${resposta}`);
         resolve(resposta.trim());
       });
@@ -102,5 +99,19 @@ export class TerminalController {
     const entrada = await this.perguntar("Digite o ID do Pokémon a remover: ");
     const id = parseInt(entrada);
     this.catalogo.removerPokemon(id);
+  }
+
+  private listarPokemons() {
+    const pokemons = this.catalogo.listarPokemons();
+    if (pokemons.length === 0) {
+      console.log("[AVISO] O catálogo está vazio.");
+      return;
+    }
+    console.log("\n=== Catálogo de Pokémon ===");
+    pokemons.forEach((p) => {
+      console.log(
+        `#${String(p.id)} - ${p.name} | Tipos: ${p.tipos.join(", ")} | Altura: ${String(p.altura)} | Peso: ${String(p.peso)}`,
+      );
+    });
   }
 }
