@@ -44,24 +44,24 @@ Antes de executar o projeto, é necessário ter instalado:
 Clone o repositório:
 ```
 git clone https://github.com/PauloBecker/Pokedex-TypeScript-Lite
-
-Acesse a pasta do projeto:
-
+```
+### Acesse a pasta do projeto:
+```
 cd pokedex-typescript-lite
-
-Instale as dependências:
-
+```
+### Instale as dependências:
+```
 npm install
-
-Como executar
+```
+### Como executar
 Execute o projeto em ambiente de desenvolvimento:
-
+```
 npm run dev
-
+```
 Ou compile e rode:
-
+```
 npm run build
-npm run start
+npm run dev:ts
 ```
 ## Estrutura do projeto
 ```
