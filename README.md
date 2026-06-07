@@ -1,5 +1,7 @@
 # Pokédex TypeScript Lite
 
+![Banner do Projeto](./docs/pika-poke.jpg)
+
 ## Sobre o projeto
 O **Pokédex TypeScript Lite** é uma aplicação simples em Node.js com TypeScript que consulta dados de Pokémon na [PokeAPI](https://pokeapi.co/) e organiza alguns resultados em um catálogo local durante a execução do programa.
 
