@@ -250,8 +250,6 @@ private mostrarMenu() {
   console.log("3 - Listar catálogo");
   console.log("4 - Remover Pokémon");
   console.log("0 - Sair");
-  this.rl.setPrompt("Opção: ");
-  this.rl.prompt();
 }
 ```
 Isso demonstra o uso de classes para separar responsabilidades: a lógica de negócio fica no catálogo e a lógica de interface no controlador.
